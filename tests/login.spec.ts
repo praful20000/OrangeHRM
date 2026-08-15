@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import testData from '../test-data/test-data.json';
 
-test.describe('Login - Valid Login', () => {
+test.describe('Login - Valid Login',{ tag: '@smoke' }, () => {
   test('should log in and display Dashboard', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
@@ -16,7 +16,7 @@ test.describe('Login - Valid Login', () => {
   });
 });
 
-test.describe('Login - Invalid Login', () => {
+test.describe('Login - Invalid Login',{ tag: '@smoke' }, () => {
   test('shows an error and stays on login page', async ({ page }) => {
     const login = new LoginPage(page);
 
@@ -29,7 +29,7 @@ test.describe('Login - Invalid Login', () => {
   });
 });
 
-test.describe('Login - Empty Fields Validation', () => {
+test.describe('Login - Empty Fields Validation',{ tag: '@smoke' }, () => {
   test('shows required messages and prevents login', async ({ page }) => {
     const login = new LoginPage(page);
 
@@ -47,7 +47,7 @@ test.describe('Login - Empty Fields Validation', () => {
   });
 });
 
-test.describe('Login - Password Masking', () => {
+test.describe('Login - Password Masking',{ tag: '@smoke' }, () => {
   test('password characters are masked and login succeeds', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
@@ -65,7 +65,7 @@ test.describe('Login - Password Masking', () => {
   });
 });
 
-test.describe('Login - Logout', () => {
+test.describe('Login - Logout',{ tag: '@smoke' }, () => {
   test('logs out and returns to login page with username visible', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
