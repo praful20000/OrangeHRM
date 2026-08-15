@@ -1,0 +1,54 @@
+{
+  "credentials": {
+    "admin": {
+      "username": "Admin",
+      "password": "admin123"
+    }
+  },
+  "employees": [
+    {
+      "firstName": "Kannan",
+      "middleName": "S",
+      "lastName": "Kumar",
+      "employeeId": "10025"
+    }
+  ],
+  "names": {
+    "fullName": "Kannan Kumar",
+    "updatedLastName": "Raj"
+  },
+  "loginDetails": {
+    "username": "kannan01",
+    "password": "Admin@123",
+    "mismatchPassword": "Admin@321"
+  },
+  "supervisor": "Roshini",
+  "files": {
+    "profilePngBase64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=",
+    "pdfBase64": "JVBERi0xLjQKJcTl8uXrp/Og0MTGCjEgMCBvYmoKPDwKL0xlbmd0aCAyIDAgUgo+PgpzdHJlYW0KJSBQREYgZGF0YQoKZW5kc3RyZWFtCmVuZG9iagoyIDAgb2JqCjIuMwpzdHJlYW0KZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAxMTkgMDAwMDAgbiAKMDAwMDAwMDA5NCAwMDAwMCBuIAowMDAwMDAwMjQ4IDAwMDAwIG4gCnRyYWlsZXIKPDwKL1NpemUgMyAvUm9vdCAxIDAgUiAvSW5mbyAyIDAgUiA+PgpzdGFydHhyZWYKMTg0CiUlRU9G"
+  },
+  "profileEmployee": {
+    "firstName": "Profile",
+    "middleName": "I",
+    "lastName": "User",
+    "employeeId": ""
+  },
+  "invalidEmployee": {
+    "firstName": "Invalid",
+    "middleName": "F",
+    "lastName": "User",
+    "employeeId": ""
+  },
+  "seedEmployee": {
+    "firstName": "Seed",
+    "middleName": "S",
+    "lastName": "Employee",
+    "employeeId": ""
+  },
+  "duplicateEmployee": {
+    "firstName": "Dup",
+    "middleName": "D",
+    "lastName": "User",
+    "employeeId": ""
+  }
+}
