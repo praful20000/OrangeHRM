@@ -6,6 +6,7 @@
   "scripts": {
     "test": "playwright test",
     "smokeTest": "playwright test --grep @smoke",
+    "regressionTest": "playwright test --grep @regression",
     "smokeTest:headed": "playwright test --headed",
     "allure:report": "allure generate allure-results --clean -o allure-report"
   },

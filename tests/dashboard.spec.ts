@@ -21,7 +21,7 @@ test.describe('Dashboard - Menus, Widgets, User Info', () => {
   });
 });
 
-test.describe('Dashboard - Navigation', () => {
+test.describe('Dashboard - Navigation',{tag: '@regression'}, () => {
   test('left navigation links navigate to correct pages', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
@@ -68,7 +68,7 @@ test.describe('Dashboard - Navigation', () => {
   });
 });
 
-test.describe('Dashboard - Refresh and Navigation', () => {
+test.describe('Dashboard - Refresh and Navigation', {tag: '@regression'},() => {
   test('refresh retains session and dashboard remains loaded', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
@@ -96,7 +96,7 @@ test.describe('Dashboard - Refresh and Navigation', () => {
   });
 });
 
-test.describe('Dashboard - Authentication and Role Access', () => {
+test.describe('Dashboard - Authentication and Role Access',{tag: '@regression'}, () => {
   test('direct dashboard access redirects to login; login then shows role-appropriate dashboard', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);

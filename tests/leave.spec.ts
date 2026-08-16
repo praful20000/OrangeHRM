@@ -4,7 +4,7 @@ import { DashboardPage } from '../pages/DashboardPage';
 import { LeavePage } from '../pages/LeavePage';
 import testData from '../test-data/test-data.json';
 
-test.describe('Leave - Apply Leave', () => {
+test.describe('Leave - Apply Leave',{tag: '@regression'}, () => {
   test('shows the Apply Leave page and its visible navigation actions', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
@@ -28,7 +28,7 @@ test.describe('Leave - Apply Leave', () => {
   });
 });
 
-test.describe('Leave - My Leave Filters', () => {
+test.describe('Leave - My Leave Filters', {tag: '@regression'}, () => {
   test('searches My Leave by employee, status, and leave type', async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);

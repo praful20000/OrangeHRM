@@ -5,8 +5,8 @@ import { PimPage } from '../pages/PimPage';
 import path from 'path';
 import testData from '../test-data/test-data.json';
 
-test.describe('PIM - Add Employee', () => {
-  test('Add Employee with valid details', async ({ page }) => {
+test.describe('PIM - Add Employee', {tag : '@regression'},() => {
+  test('Add Employee with valid details',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -38,7 +38,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(page.getByText('Personal Details').first()).toBeVisible();
   });
 
-  test('Required field validation on Add Employee', async ({ page }) => {
+  test('Required field validation on Add Employee',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -64,7 +64,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(page).toHaveURL(/\/pim\/addEmployee/);
   });
 
-  test('Duplicate Employee Id validation', async ({ page }) => {
+  test('Duplicate Employee Id validation',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -92,7 +92,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(stayedOnAdd).toBeTruthy();
   });
 
-  test('Profile image upload', async ({ page }) => {
+  test('Profile image upload',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -120,7 +120,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(profileImg).toBeVisible();
   });
 
-  test('Invalid profile image upload (reject PDF)', async ({ page }) => {
+  test('Invalid profile image upload (reject PDF)',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -148,7 +148,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(validation).toBeVisible();
   });
 
-  test('Create Login Details fields and options', async ({ page }) => {
+  test('Create Login Details fields and options',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -191,7 +191,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(afterCount).toBeGreaterThanOrEqual(beforeCount + 3);
   });
 
-  test('Password mismatch validation on Create Login Details', async ({ page }) => {
+  test('Password mismatch validation on Create Login Details',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -270,7 +270,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(stayedOnAdd).toBeTruthy();
   });
 
-  test('Search Employee by Name', async ({ page }) => {
+  test('Search Employee by Name', { tag: '@regression' },async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -309,7 +309,7 @@ test.describe('PIM - Add Employee', () => {
     }, { timeout: 5000 }).toBeGreaterThan(0);
   });
 
-  test('Search Employee by Employee ID', async ({ page }) => {
+  test('Search Employee by Employee ID',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
@@ -360,7 +360,7 @@ test.describe('PIM - Add Employee', () => {
     await expect(match).toBeVisible({ timeout: 5000 });
   });
 
-  test('Reset Search Filters', async ({ page }) => {
+  test('Reset Search Filters',{ tag: '@regression' }, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
     const pim = new PimPage(page);
