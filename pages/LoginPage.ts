@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 
 export class LoginPage {
   readonly page: Page;
-  readonly usernameInputprafulla;
+  readonly usernameInput;
   readonly passwordInput;
   readonly loginButton;
   readonly errorAlert;
