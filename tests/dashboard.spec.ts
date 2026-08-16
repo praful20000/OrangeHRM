@@ -3,8 +3,8 @@ import { LoginPage } from '../pages/LoginPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import testData from '../test-data/test-data.json';
 
-test.describe('Dashboard - Menus, Widgets, User Info', () => {
-  test('shows left navigation, widgets, and user info after login', async ({ page }) => {
+test.describe('Dashboard - Menus, Widgets, User Info',{tag: '@regression'}, () => {
+  test('shows left navigation, widgets, and user info after login',{tag: '@regression'}, async ({ page }) => {
     const login = new LoginPage(page);
     const dashboard = new DashboardPage(page);
 
