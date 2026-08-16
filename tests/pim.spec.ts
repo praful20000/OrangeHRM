@@ -205,7 +205,7 @@ test.describe('PIM - Add Employee', {tag : '@regression'},() => {
     await pim.openAddEmployee();
 
     // ensure form ready
-    await page.locator('.oxd-formm-loader').waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
+    await page.locator('.oxd-form-loader').waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
     const form = page.locator('form').first();
 
     // count inputs before toggling, click visible styled switch, wait for new inputs
