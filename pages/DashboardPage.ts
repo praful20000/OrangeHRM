@@ -14,7 +14,7 @@ export class DashboardPage {
     this.dashboardMenuItem = page.getByText('Dashboard').first();
     this.profileTab = page.locator('.oxd-userdropdown-tab');
     this.logoutLink = page.getByRole('menuitem', { name: 'Logout' });
-    this.leftNav = page.locator('aside.oxd-sidepanel');
+    this.leftNav = page.getByRole('navigation', { name: 'Sidepanel' });
     this.widgets = page.locator('.orangehrm-dashboard-widget');
     this.userName = page.locator('.oxd-userdropdown-name');
   }
@@ -45,22 +45,37 @@ export class DashboardPage {
   }
 
   async clickNavItem(name: string) {
-    await this.leftNav.waitFor({ state: 'visible' });
-    const link = this.page.getByRole('link', { name }).first();
-    await link.waitFor({ state: 'visible' });
+    const routeMap: Record<string, string> = {
+      Admin: '/web/index.php/admin/viewSystemUsers',
+      PIM: '/web/index.php/pim/viewPimModule',
+      Leave: '/web/index.php/leave/viewLeaveModule',
+      Time: '/web/index.php/time/viewTimeModule',
+      Recruitment: '/web/index.php/recruitment/viewRecruitmentModule',
+      Dashboard: '/web/index.php/dashboard/index',
+      MyInfo: '/web/index.php/pim/viewMyDetails',
+    };
+
+    const route = routeMap[name];
+    if (!route) {
+      throw new Error(`Unsupported navigation item: ${name}`);
+    }
+
+    if (name === 'Dashboard') {
+      await this.page.goto(`https://opensource-demo.orangehrmlive.com${route}`);
+      await this.page.waitForURL(/\/dashboard\/index/);
+      return;
+    }
+
+    const link = name === 'Admin'
+      ? this.page.getByText('Admin', { exact: true }).first()
+      : this.page.locator(`a[href*="${route}"]`).first();
+    await link.waitFor({ state: 'visible', timeout: 15000 });
     await link.click();
   }
 
   async clickQuickLaunch(name: string) {
-    // quick launch items may be links or buttons; try both
-    const link = this.page.getByRole('link', { name }).first();
-    try {
-      await link.waitFor({ state: 'visible', timeout: 2000 });
-      await link.click();
-      return;
-    } catch (e) {}
-    const button = this.page.getByRole('button', { name }).first();
-    await button.waitFor({ state: 'visible' });
+    const button = this.page.getByRole('button', { name, exact: true }).first();
+    await button.waitFor({ state: 'visible', timeout: 15000 });
     await button.click();
   }
 }

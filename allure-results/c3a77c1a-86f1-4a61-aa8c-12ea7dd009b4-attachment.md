@@ -1,0 +1,252 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: leave.spec.ts >> Leave - My Leave Filters >> accepts valid From Date and To Date values and keeps the date fields interactive
+- Location: tests\leave.spec.ts:54:7
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Tearing down "context" exceeded the test timeout of 30000ms.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f3e3]:
+  - generic:
+    - complementary [ref=f3e4]:
+      - navigation "Sidepanel" [ref=f3e5]:
+        - generic [ref=f3e6]:
+          - link [ref=f3e7] [cursor=pointer]:
+            - /url: https://www.orangehrm.com/
+            - img "client brand banner" [ref=f3e9]
+          - text: 
+        - generic [ref=f3e10]:
+          - generic [ref=f3e11]:
+            - generic [ref=f3e12]:
+              - textbox "Search" [ref=f3e15]
+              - button "" [ref=f3e16] [cursor=pointer]
+            - separator [ref=f3e18]
+          - list [ref=f3e19]:
+            - listitem [ref=f3e20]:
+              - link "Admin" [ref=f3e21] [cursor=pointer]:
+                - /url: /web/index.php/admin/viewAdminModule
+            - listitem [ref=f3e25]:
+              - link "PIM" [ref=f3e26] [cursor=pointer]:
+                - /url: /web/index.php/pim/viewPimModule
+            - listitem [ref=f3e41]:
+              - link "Leave" [ref=f3e42] [cursor=pointer]:
+                - /url: /web/index.php/leave/viewLeaveModule
+            - listitem [ref=f3e46]:
+              - link "Time" [ref=f3e47] [cursor=pointer]:
+                - /url: /web/index.php/time/viewTimeModule
+            - listitem [ref=f3e54]:
+              - link "Recruitment" [ref=f3e55] [cursor=pointer]:
+                - /url: /web/index.php/recruitment/viewRecruitmentModule
+            - listitem [ref=f3e62]:
+              - link "My Info" [ref=f3e63] [cursor=pointer]:
+                - /url: /web/index.php/pim/viewMyDetails
+            - listitem [ref=f3e70]:
+              - link "Performance" [ref=f3e71] [cursor=pointer]:
+                - /url: /web/index.php/performance/viewPerformanceModule
+            - listitem [ref=f3e80]:
+              - link "Dashboard" [ref=f3e81] [cursor=pointer]:
+                - /url: /web/index.php/dashboard/index
+            - listitem [ref=f3e85]:
+              - link "Directory" [ref=f3e86] [cursor=pointer]:
+                - /url: /web/index.php/directory/viewDirectory
+            - listitem [ref=f3e90]:
+              - link "Maintenance" [ref=f3e91] [cursor=pointer]:
+                - /url: /web/index.php/maintenance/viewMaintenanceModule
+            - listitem [ref=f3e96]:
+              - link "Claim" [ref=f3e97] [cursor=pointer]:
+                - /url: /web/index.php/claim/viewClaimModule
+            - listitem [ref=f3e105]:
+              - link "Buzz" [ref=f3e106] [cursor=pointer]:
+                - /url: /web/index.php/buzz/viewBuzz
+    - banner [ref=f3e110]:
+      - generic [ref=f3e111]:
+        - generic [ref=f3e112]:
+          - text: 
+          - heading "Leave" [level=6] [ref=f3e114]
+        - link [ref=f3e116]:
+          - /url: https://orangehrm.com/open-source/upgrade-to-advanced
+          - button "Upgrade" [ref=f3e117] [cursor=pointer]
+        - list [ref=f3e123]:
+          - listitem [ref=f3e124]:
+            - generic [ref=f3e125] [cursor=pointer]:
+              - img "profile picture" [ref=f3e126]
+              - paragraph [ref=f3e127]: ABC GH
+              - generic [ref=f3e128]: 
+      - navigation "Topbar Menu" [ref=f3e130]:
+        - list [ref=f3e131]:
+          - listitem [ref=f3e132] [cursor=pointer]:
+            - link "Apply" [ref=f3e133]:
+              - /url: "#"
+          - listitem [ref=f3e134] [cursor=pointer]:
+            - link "My Leave" [ref=f3e135]:
+              - /url: "#"
+          - listitem [ref=f3e136] [cursor=pointer]:
+            - generic [ref=f3e137]:
+              - text: Entitlements
+              - generic [ref=f3e138]: 
+          - listitem [ref=f3e139] [cursor=pointer]:
+            - generic [ref=f3e140]:
+              - text: Reports
+              - generic [ref=f3e141]: 
+          - listitem [ref=f3e142] [cursor=pointer]:
+            - generic [ref=f3e143]:
+              - text: Configure
+              - generic [ref=f3e144]: 
+          - listitem [ref=f3e145] [cursor=pointer]:
+            - link "Leave List" [ref=f3e146]:
+              - /url: "#"
+          - listitem [ref=f3e147] [cursor=pointer]:
+            - link "Assign Leave" [ref=f3e148]:
+              - /url: "#"
+          - button "" [ref=f3e150] [cursor=pointer]
+  - generic [ref=f3e152]:
+    - generic [ref=f3e154]:
+      - generic [ref=f3e155]:
+        - generic [ref=f3e156]:
+          - heading "My Leave List" [level=5] [ref=f3e158]
+          - button "" [ref=f3e161] [cursor=pointer]
+        - separator [ref=f3e163]
+        - generic [ref=f3e165]:
+          - generic [ref=f3e167]:
+            - generic [ref=f3e169]:
+              - generic [ref=f3e170]: From Date
+              - generic [ref=f3e173]:
+                - generic [ref=f3e174]:
+                  - textbox "yyyy-dd-mm" [active] [ref=f3e175]: 2024-01-01
+                  - generic [ref=f3e176] [cursor=pointer]: 
+                - generic [ref=f3e178]:
+                  - generic [ref=f3e179]:
+                    - button "" [ref=f3e180] [cursor=pointer]
+                    - list [ref=f3e182]:
+                      - listitem [ref=f3e183] [cursor=pointer]:
+                        - generic [ref=f3e184]:
+                          - paragraph [ref=f3e185]: January
+                          - generic [ref=f3e186]: 
+                      - listitem [ref=f3e187] [cursor=pointer]:
+                        - generic [ref=f3e188]:
+                          - paragraph [ref=f3e189]: "2024"
+                          - generic [ref=f3e190]: 
+                    - button "" [ref=f3e191] [cursor=pointer]
+                  - generic [ref=f3e193]:
+                    - generic [ref=f3e194]: S
+                    - generic [ref=f3e195]: M
+                    - generic [ref=f3e196]: T
+                    - generic [ref=f3e197]: W
+                    - generic [ref=f3e198]: T
+                    - generic [ref=f3e199]: F
+                    - generic [ref=f3e200]: S
+                  - generic [ref=f3e201]:
+                    - generic [ref=f3e202]: "1"
+                    - generic [ref=f3e204]: "2"
+                    - generic [ref=f3e206]: "3"
+                    - generic [ref=f3e208]: "4"
+                    - generic [ref=f3e210]: "5"
+                    - generic [ref=f3e212]: "6"
+                    - generic [ref=f3e214]: "7"
+                    - generic [ref=f3e216]: "8"
+                    - generic [ref=f3e218]: "9"
+                    - generic [ref=f3e220]: "10"
+                    - generic [ref=f3e222]: "11"
+                    - generic [ref=f3e224]: "12"
+                    - generic [ref=f3e226]: "13"
+                    - generic [ref=f3e228]: "14"
+                    - generic [ref=f3e230]: "15"
+                    - generic [ref=f3e232]: "16"
+                    - generic [ref=f3e234]: "17"
+                    - generic [ref=f3e236]: "18"
+                    - generic [ref=f3e238]: "19"
+                    - generic [ref=f3e240]: "20"
+                    - generic [ref=f3e242]: "21"
+                    - generic [ref=f3e244]: "22"
+                    - generic [ref=f3e246]: "23"
+                    - generic [ref=f3e248]: "24"
+                    - generic [ref=f3e250]: "25"
+                    - generic [ref=f3e252]: "26"
+                    - generic [ref=f3e254]: "27"
+                    - generic [ref=f3e256]: "28"
+                    - generic [ref=f3e258]: "29"
+                    - generic [ref=f3e260]: "30"
+                    - generic [ref=f3e262]: "31"
+                  - generic [ref=f3e265]:
+                    - generic [ref=f3e266] [cursor=pointer]: Today
+                    - generic [ref=f3e267] [cursor=pointer]: Clear
+                    - generic [ref=f3e268] [cursor=pointer]: Close
+            - generic [ref=f3e270]:
+              - generic [ref=f3e271]: To Date
+              - generic [ref=f3e275]:
+                - textbox "yyyy-dd-mm" [ref=f3e276]: 2024-31-01
+                - generic [ref=f3e277] [cursor=pointer]: 
+            - generic [ref=f3e279]:
+              - generic [ref=f3e280]: Show Leave with Status*
+              - generic [ref=f3e283]:
+                - generic [ref=f3e284] [cursor=pointer]:
+                  - generic [ref=f3e285]: Select
+                  - generic [ref=f3e286]: 
+                - generic [ref=f3e288]:
+                  - generic [ref=f3e289]:
+                    - text: Rejected
+                    - generic [ref=f3e290] [cursor=pointer]: 
+                  - generic [ref=f3e291]:
+                    - text: Cancelled
+                    - generic [ref=f3e292] [cursor=pointer]: 
+                  - generic [ref=f3e293]:
+                    - text: Pending Approval
+                    - generic [ref=f3e294] [cursor=pointer]: 
+                  - generic [ref=f3e295]:
+                    - text: Scheduled
+                    - generic [ref=f3e296] [cursor=pointer]: 
+                  - generic [ref=f3e297]:
+                    - text: Taken
+                    - generic [ref=f3e298] [cursor=pointer]: 
+            - generic [ref=f3e300]:
+              - generic [ref=f3e301]: Leave Type
+              - generic [ref=f3e305] [cursor=pointer]:
+                - generic [ref=f3e306]: "-- Select --"
+                - generic [ref=f3e307]: 
+          - separator [ref=f3e309]
+          - generic [ref=f3e310]:
+            - paragraph [ref=f3e311]: "* Required"
+            - button "Reset" [ref=f3e312] [cursor=pointer]
+            - button "Search" [ref=f3e313] [cursor=pointer]
+      - generic [ref=f3e314]:
+        - generic [ref=f3e315]: No Records Found
+        - table [ref=f3e318]:
+          - rowgroup [ref=f3e319]:
+            - row [ref=f3e320]:
+              - columnheader "" [ref=f3e321]:
+                - generic [ref=f3e323] [cursor=pointer]:
+                  - checkbox "" [ref=f3e324]
+                  - generic [ref=f3e325]: 
+              - columnheader "Date" [ref=f3e327]
+              - columnheader "Employee Name" [ref=f3e328]
+              - columnheader "Leave Type" [ref=f3e329]
+              - columnheader "Leave Balance (Days)" [ref=f3e330]
+              - columnheader "Number of Days" [ref=f3e331]
+              - columnheader "Status" [ref=f3e332]
+              - columnheader "Comments" [ref=f3e333]
+              - columnheader "Actions" [ref=f3e334]
+          - rowgroup
+    - generic [ref=f3e336]:
+      - paragraph [ref=f3e337]: OrangeHRM OS 5.9
+      - paragraph [ref=f3e338]:
+        - text: © 2005 - 2026
+        - link "OrangeHRM, Inc" [ref=f3e339] [cursor=pointer]:
+          - /url: http://www.orangehrm.com
+        - text: . All rights reserved.
+```

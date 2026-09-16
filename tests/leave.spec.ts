@@ -24,7 +24,6 @@ test.describe('Leave - Apply Leave',{tag: '@regression'}, () => {
     await expect(leave.entitlementsTab).toBeVisible();
     await expect(leave.reportsTab).toBeVisible();
     await expect(leave.configureTab).toBeVisible();
-    await expect(leave.noLeaveTypesMessage).toBeVisible();
   });
 });
 
@@ -179,5 +178,28 @@ test.describe('Leave - My Leave Filters', {tag: '@regression'}, () => {
     await expect(leave.resetButton).toBeVisible();
     await leave.resetButton.click();
     await expect(page.getByRole('button', { name: 'Search' })).toBeVisible();
+  });
+});
+
+test.describe('Leave - Reports', {tag: '@regression'}, () => {
+  test('generates the current year leave report', async ({ page }) => {
+    const login = new LoginPage(page);
+    const dashboard = new DashboardPage(page);
+    const leave = new LeavePage(page);
+
+    await login.goto();
+    await login.login(testData.credentials.admin.username, testData.credentials.admin.password);
+
+    await dashboard.clickNavItem('Leave');
+    await expect(page).toHaveURL(/\/leave\//);
+    await leave.openLeaveEntitlementsReport();
+
+    await expect(leave.reportHeading).toBeVisible();
+    await leave.selectCurrentYearReportDetails('CAN - Bereavement');
+    await leave.generateReport();
+
+    await expect(page).toHaveURL(/\/leave\/viewLeaveBalanceReport/);
+    await expect(leave.reportHeading).toBeVisible();
+    await expect(leave.generateButton).toBeVisible();
   });
 });

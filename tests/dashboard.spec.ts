@@ -54,9 +54,9 @@ test.describe('Dashboard - Navigation',{tag: '@regression'}, () => {
     await login.login(testData.credentials.admin.username, testData.credentials.admin.password);
 
     const quickMap: {name: string; path: RegExp}[] = [
-      { name: 'Admin', path: /\/admin\// },
-      { name: 'PIM', path: /\/pim\// },
-      { name: 'Leave', path: /\/leave\// },
+      { name: 'Assign Leave', path: /\/leave\/assignLeave/ },
+      { name: 'Leave List', path: /\/leave\/viewLeaveList/ },
+      { name: 'Apply Leave', path: /\/leave\/applyLeave/ },
     ];
 
     for (const item of quickMap) {

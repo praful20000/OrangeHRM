@@ -165,7 +165,7 @@ test.describe('PIM - Add Employee', {tag : '@regression'},() => {
     await page.locator('.oxd-form-loader').waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
     const form = page.locator('form').first();
     // count inputs before toggling, then pick newly added inputs for username/password/confirm
-    const formInputs = form.locator('input:not([type="file"])');
+    const formInputs = form.locator('input:not([type="file"]):not([type="checkbox"]):not([type="radio"])');
     const beforeCount = await formInputs.count();
     const checkbox = form.locator('input[type="checkbox"]').first();
     const isChecked = await checkbox.isChecked().catch(() => false);
@@ -173,7 +173,7 @@ test.describe('PIM - Add Employee', {tag : '@regression'},() => {
       await form.locator('.oxd-switch-input').first().click({ force: true });
       await page.waitForTimeout(200);
     }
-    const afterInputs = form.locator('input:not([type="file"])');
+    const afterInputs = form.locator('input:not([type="file"]):not([type="checkbox"]):not([type="radio"])');
     const username = afterInputs.nth(beforeCount);
     const password = afterInputs.nth(beforeCount + 1);
     const confirm = afterInputs.nth(beforeCount + 2);
@@ -261,6 +261,7 @@ test.describe('PIM - Add Employee', {tag : '@regression'},() => {
     await pwInputs.nth(0).fill(testData.loginDetails.password);
     await pwInputs.nth(1).fill(testData.loginDetails.mismatchPassword); // deliberate mismatch
 
+    await page.locator('.oxd-form-loader').waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
     await form.getByRole('button', { name: 'Save' }).click();
 
     // expect validation message shown and remain on add page
