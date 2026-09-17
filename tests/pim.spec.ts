@@ -397,5 +397,3 @@ test.describe('PIM - Add Employee', {tag : '@regression'},() => {
     if (await supervisorInput.count() > 0) await expect.poll(async () => await supervisorInput.inputValue(), { timeout: 5000 }).toBe('');
   });
 });
-// This is pim spec file for testing PIM module functionalities like adding employees, validating required fields, handling duplicate IDs, uploading profile images, creating login details, and searching employees by name or ID.
-// Testing
