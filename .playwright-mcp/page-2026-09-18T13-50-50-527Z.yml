@@ -1,0 +1,89 @@
+- generic [ref=f1e3]:
+  - generic:
+    - complementary [ref=f1e4]:
+      - navigation "Sidepanel" [ref=f1e5]:
+        - generic [ref=f1e6]:
+          - link [ref=f1e7] [cursor=pointer]:
+            - /url: https://www.orangehrm.com/
+            - img "client brand banner" [ref=f1e9]
+          - text: 
+        - generic [ref=f1e10]:
+          - generic [ref=f1e11]:
+            - generic [ref=f1e12]:
+              - textbox "Search" [ref=f1e15]
+              - button "" [ref=f1e16] [cursor=pointer]
+            - separator [ref=f1e18]
+          - list [ref=f1e19]:
+            - listitem [ref=f1e20]:
+              - link "Leave" [ref=f1e21] [cursor=pointer]:
+                - /url: /web/index.php/leave/viewLeaveModule
+            - listitem [ref=f1e25]:
+              - link "Time" [ref=f1e26] [cursor=pointer]:
+                - /url: /web/index.php/time/viewTimeModule
+            - listitem [ref=f1e33]:
+              - link "My Info" [ref=f1e34] [cursor=pointer]:
+                - /url: /web/index.php/pim/viewMyDetails
+            - listitem [ref=f1e41]:
+              - link "Performance" [ref=f1e42] [cursor=pointer]:
+                - /url: /web/index.php/performance/viewPerformanceModule
+            - listitem [ref=f1e51]:
+              - link "Dashboard" [ref=f1e52] [cursor=pointer]:
+                - /url: /web/index.php/dashboard/index
+            - listitem [ref=f1e56]:
+              - link "Directory" [ref=f1e57] [cursor=pointer]:
+                - /url: /web/index.php/directory/viewDirectory
+            - listitem [ref=f1e61]:
+              - link "Claim" [ref=f1e62] [cursor=pointer]:
+                - /url: /web/index.php/claim/viewClaimModule
+            - listitem [ref=f1e70]:
+              - link "Buzz" [ref=f1e71] [cursor=pointer]:
+                - /url: /web/index.php/buzz/viewBuzz
+    - banner [ref=f1e75]:
+      - generic [ref=f1e76]:
+        - generic [ref=f1e77]:
+          - text: 
+          - heading "Dashboard" [level=6] [ref=f1e79]
+        - list [ref=f1e81]:
+          - listitem [ref=f1e82]:
+            - generic [ref=f1e83] [cursor=pointer]:
+              - img "profile picture" [ref=f1e84]
+              - paragraph [ref=f1e85]: Ranga Akunuri
+              - generic [ref=f1e86]: 
+      - navigation "Topbar Menu" [ref=f1e88]:
+        - list [ref=f1e89]:
+          - button "" [ref=f1e91] [cursor=pointer]
+  - generic [ref=f1e93]:
+    - generic [ref=f1e95]:
+      - generic [ref=f1e97]:
+        - generic [ref=f1e99]:
+          - generic [ref=f1e100]: 
+          - paragraph [ref=f1e101]: Time at Work
+        - separator [ref=f1e102]
+      - generic [ref=f1e106]:
+        - generic [ref=f1e108]:
+          - generic [ref=f1e109]: 
+          - paragraph [ref=f1e110]: My Actions
+        - separator [ref=f1e111]
+        - generic [ref=f1e113]:
+          - img "No Content" [ref=f1e114]
+          - paragraph [ref=f1e115]: No Pending Actions to Perform
+      - generic [ref=f1e117]:
+        - generic [ref=f1e119]:
+          - generic [ref=f1e120]: 
+          - paragraph [ref=f1e121]: Quick Launch
+        - separator [ref=f1e122]
+      - generic [ref=f1e126]:
+        - generic [ref=f1e128]:
+          - generic [ref=f1e129]: 
+          - paragraph [ref=f1e130]: Buzz Latest Posts
+        - separator [ref=f1e131]
+      - generic [ref=f1e135]:
+        - paragraph [ref=f1e141]: Employees on Leave Today
+        - separator [ref=f1e142]
+    - generic [ref=f1e145]:
+      - paragraph [ref=f1e146]: OrangeHRM OS 5.9
+      - paragraph [ref=f1e147]:
+        - text: © 2005 - 2026
+        - link "OrangeHRM, Inc" [ref=f1e148] [cursor=pointer]:
+          - /url: http://www.orangehrm.com
+        - text: . All rights reserved.
