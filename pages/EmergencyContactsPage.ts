@@ -42,6 +42,7 @@ export class EmergencyContactsPage {
     await this.mobileInput.fill(mobile);
     await this.workTelephoneInput.fill(workTelephone);
     await this.saveButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   row(name: string) {

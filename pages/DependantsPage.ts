@@ -37,6 +37,7 @@ export class DependantsPage {
     await this.page.getByRole('option', { name: relationship, exact: true }).click();
     await this.dateOfBirthInput.fill(dateOfBirth);
     await this.saveButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   row(name: string) {

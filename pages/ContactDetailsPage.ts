@@ -58,7 +58,14 @@ export class ContactDetailsPage {
   }
 
   async save() {
+    const saveResponse = this.page.waitForResponse(response =>
+      response.url().includes('/contact-details') &&
+      ['POST', 'PUT', 'PATCH'].includes(response.request().method()) &&
+      response.ok(),
+    );
+
     await this.saveButton.click();
+    await saveResponse;
   }
 
   async refresh() {

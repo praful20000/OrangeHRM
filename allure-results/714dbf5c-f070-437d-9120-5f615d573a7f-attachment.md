@@ -1,0 +1,261 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: my-info.spec.ts >> My Info - Personal Details >> ESS user cannot edit restricted personal details
+- Location: tests\my-info.spec.ts:91:7
+
+# Error details
+
+```
+Error: expect(page).toHaveURL(expected) failed
+
+Expected pattern: /\/dashboard\/index/
+Received string:  "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+Timeout: 5000ms
+
+Call log:
+  - Expect "toHaveURL" with timeout 5000ms
+    13 × locator resolved to <html>…</html>
+       - unexpected value "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+
+```
+
+```yaml
+- img "company-branding"
+- heading "Login" [level=5]
+- alert:
+  - text: 
+  - paragraph: Invalid credentials
+- paragraph: "Username : Admin"
+- paragraph: "Password : admin123"
+- text:  Username
+- textbox "Username"
+- text:  Password
+- textbox "Password"
+- button "Login"
+- paragraph: Forgot your password?
+- link:
+  - /url: https://www.linkedin.com/company/orangehrm/mycompany/
+- link:
+  - /url: https://www.facebook.com/OrangeHRM/
+- link:
+  - /url: https://twitter.com/orangehrm?lang=en
+- link:
+  - /url: https://www.youtube.com/c/OrangeHRMInc
+- paragraph: OrangeHRM OS 5.9
+- paragraph:
+  - text: © 2005 - 2026
+  - link "OrangeHRM, Inc":
+    - /url: http://www.orangehrm.com
+  - text: . All rights reserved.
+- img "orangehrm-logo"
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect } from '@playwright/test';
+  2   | import { LoginPage } from '../pages/LoginPage';
+  3   | import { DashboardPage } from '../pages/DashboardPage';
+  4   | import { MyInfoPage } from '../pages/MyInfoPage';
+  5   | import { ContactDetailsPage } from '../pages/ContactDetailsPage';
+  6   | import { EmergencyContactsPage } from '../pages/EmergencyContactsPage';
+  7   | import { DependantsPage } from '../pages/DependantsPage';
+  8   | import testData from '../test-data/test-data.json';
+  9   | 
+  10  | async function loginAsEss(page: import('@playwright/test').Page) {
+  11  |   const login = new LoginPage(page);
+  12  |   await login.goto();
+  13  |   await login.login(testData.loginDetails.username, testData.loginDetails.password);
+  14  |   await expect(page).toHaveURL(/\/dashboard\/index/);
+  15  |   return new DashboardPage(page);
+  16  | }
+  17  | 
+  18  | async function openMyInfoTab(page: import('@playwright/test').Page, dashboard: DashboardPage, tab: string) {
+  19  |   await dashboard.clickNavItem('MyInfo');
+  20  |   await page.getByRole('link', { name: tab, exact: true }).click();
+  21  | }
+  22  | 
+  23  | test.describe('My Info - Personal Details', { tag: '@regression' }, () => {
+  24  |   test('ESS user can view personal details and personal information fields', async ({ page }) => {
+  25  |     const login = new LoginPage(page);
+  26  |     const dashboard = new DashboardPage(page);
+  27  |     const myInfo = new MyInfoPage(page);
+  28  | 
+  29  |     await login.goto();
+  30  |     await login.login(testData.loginDetails.username, testData.loginDetails.password);
+  31  | 
+  32  |     await expect(page).toHaveURL(/\/dashboard\/index/);
+  33  | 
+  34  |     await dashboard.clickNavItem('MyInfo');
+  35  |     await expect(page).toHaveURL(/\/pim\/viewPersonalDetails\//);
+  36  | 
+  37  |     await expect(myInfo.personalDetailsHeading).toBeVisible();
+  38  |     await expect(myInfo.firstNameInput).toBeVisible();
+  39  |     await expect(myInfo.middleNameInput).toBeVisible();
+  40  |     await expect(myInfo.lastNameInput).toBeVisible();
+  41  |     await expect(myInfo.employeeIdInput).toBeVisible();
+  42  |     await expect(myInfo.otherIdInput).toBeVisible();
+  43  |     await expect(myInfo.driversLicenseInput).toBeVisible();
+  44  |   });
+  45  | 
+  46  |   test('ESS user can edit personal details and retain the updates after refresh', async ({ page }) => {
+  47  |     const login = new LoginPage(page);
+  48  |     const dashboard = new DashboardPage(page);
+  49  |     const myInfo = new MyInfoPage(page);
+  50  | 
+  51  |     await login.goto();
+  52  |     await login.login(testData.loginDetails.username, testData.loginDetails.password);
+  53  |     await expect(page).toHaveURL(/\/dashboard\/index/);
+  54  | 
+  55  |     await dashboard.clickNavItem('MyInfo');
+  56  |     await expect(page).toHaveURL(/\/pim\/viewPersonalDetails\//);
+  57  |     await myInfo.enterEditMode();
+  58  | 
+  59  |     const updatedFirstName = `Ess${Date.now().toString().slice(-6)}`;
+  60  |     const updatedMiddleName = 'Updated';
+  61  |     const updatedLastName = 'User';
+  62  |     const updatedLicenseExpiry = '2030-12-31';
+  63  | 
+  64  |     await myInfo.firstNameInput.fill(updatedFirstName);
+  65  |     await myInfo.middleNameInput.fill(updatedMiddleName);
+  66  |     await myInfo.lastNameInput.fill(updatedLastName);
+  67  |     await myInfo.licenseExpiryInput.fill(updatedLicenseExpiry);
+  68  |     await myInfo.femaleRadio.check();
+  69  |     await myInfo.selectDropdown(myInfo.maritalStatusSelect, 'Married');
+  70  |     await myInfo.selectDropdown(myInfo.nationalitySelect, 'Canadian');
+  71  |     await myInfo.savePersonalDetails();
+  72  | 
+  73  |     await expect(page.getByText('Successfully Saved')).toBeVisible();
+  74  |     await expect(myInfo.firstNameInput).toHaveValue(updatedFirstName);
+  75  |     await expect(myInfo.middleNameInput).toHaveValue(updatedMiddleName);
+  76  |     await expect(myInfo.lastNameInput).toHaveValue(updatedLastName);
+  77  |     await expect(myInfo.licenseExpiryInput).toHaveValue(updatedLicenseExpiry);
+  78  |     await expect(myInfo.femaleRadio).toBeChecked();
+  79  | 
+  80  |     await myInfo.refresh();
+  81  | 
+  82  |     await expect(myInfo.firstNameInput).toHaveValue(updatedFirstName);
+  83  |     await expect(myInfo.middleNameInput).toHaveValue(updatedMiddleName);
+  84  |     await expect(myInfo.lastNameInput).toHaveValue(updatedLastName);
+  85  |     await expect(myInfo.licenseExpiryInput).toHaveValue(updatedLicenseExpiry);
+  86  |     await expect(myInfo.femaleRadio).toBeChecked();
+  87  |     await expect(myInfo.maritalStatusSelect).toContainText('Married');
+  88  |     await expect(myInfo.nationalitySelect).toContainText('Canadian');
+  89  |   });
+  90  | 
+  91  |   test('ESS user cannot edit restricted personal details', async ({ page }) => {
+  92  |     const login = new LoginPage(page);
+  93  |     const dashboard = new DashboardPage(page);
+  94  |     const myInfo = new MyInfoPage(page);
+  95  | 
+  96  |     await login.goto();
+  97  |     await login.login(testData.loginDetails.username, testData.loginDetails.password);
+> 98  |     await expect(page).toHaveURL(/\/dashboard\/index/);
+      |                        ^ Error: expect(page).toHaveURL(expected) failed
+  99  | 
+  100 |     await dashboard.clickNavItem('MyInfo');
+  101 |     await expect(page).toHaveURL(/\/pim\/viewPersonalDetails\//);
+  102 |     await myInfo.enterEditMode();
+  103 | 
+  104 |     for (const label of ['Employee Id', 'SSN No', 'SIN No', "Driver's License Number", 'Date of Birth']) {
+  105 |       const field = myInfo.restrictedField(label);
+  106 |       if (await field.count() > 0) await expect(field).not.toBeEditable();
+  107 |     }
+  108 |   });
+  109 | });
+  110 | 
+  111 | test.describe('My Info - Contact Details', { tag: '@regression' }, () => {
+  112 |   test('ESS user can view contact details and contact information fields', async ({ page }) => {
+  113 |     const dashboard = await loginAsEss(page);
+  114 |     const contactDetails = new ContactDetailsPage(page);
+  115 | 
+  116 |     await openMyInfoTab(page, dashboard, 'Contact Details');
+  117 |     await expect(page).toHaveURL(/\/pim\/contactDetails\//);
+  118 |     await expect(contactDetails.heading).toBeVisible();
+  119 | 
+  120 |     for (const field of [
+  121 |       contactDetails.street1Input,
+  122 |       contactDetails.street2Input,
+  123 |       contactDetails.cityInput,
+  124 |       contactDetails.stateInput,
+  125 |       contactDetails.zipInput,
+  126 |       contactDetails.countrySelect,
+  127 |       contactDetails.homeTelephoneInput,
+  128 |       contactDetails.mobileInput,
+  129 |       contactDetails.workTelephoneInput,
+  130 |       contactDetails.workEmailInput,
+  131 |       contactDetails.otherEmailInput,
+  132 |     ]) {
+  133 |       await expect(field).toBeVisible();
+  134 |     }
+  135 |   });
+  136 | 
+  137 |   test('ESS user can edit contact details and retain updates after refresh', async ({ page }) => {
+  138 |     const dashboard = await loginAsEss(page);
+  139 |     const contactDetails = new ContactDetailsPage(page);
+  140 | 
+  141 |     await openMyInfoTab(page, dashboard, 'Contact Details');
+  142 |     await expect(page).toHaveURL(/\/pim\/contactDetails\//);
+  143 |     await contactDetails.enterEditMode();
+  144 | 
+  145 |     const suffix = Date.now().toString().slice(-6);
+  146 |     const values = {
+  147 |       street1: `${suffix} Main Street`,
+  148 |       street2: 'Suite 20',
+  149 |       city: 'Toronto',
+  150 |       state: 'Ontario',
+  151 |       zip: 'M5V 2T6',
+  152 |       home: '416-555-0101',
+  153 |       mobile: '416-555-0102',
+  154 |       work: '416-555-0103',
+  155 |       workEmail: `ess.work.${suffix}@example.com`,
+  156 |       otherEmail: `ess.other.${suffix}@example.com`,
+  157 |     };
+  158 | 
+  159 |     await contactDetails.selectCountry('Canada');
+  160 |     await contactDetails.street1Input.fill(values.street1);
+  161 |     await contactDetails.street2Input.fill(values.street2);
+  162 |     await contactDetails.cityInput.fill(values.city);
+  163 |     await contactDetails.stateInput.fill(values.state);
+  164 |     await contactDetails.zipInput.fill(values.zip);
+  165 |     await contactDetails.homeTelephoneInput.fill(values.home);
+  166 |     await contactDetails.mobileInput.fill(values.mobile);
+  167 |     await contactDetails.workTelephoneInput.fill(values.work);
+  168 |     await contactDetails.workEmailInput.fill(values.workEmail);
+  169 |     await contactDetails.otherEmailInput.fill(values.otherEmail);
+  170 |     await contactDetails.save();
+  171 | 
+  172 |     await expect(contactDetails.street1Input).toHaveValue(values.street1);
+  173 |     await expect(contactDetails.cityInput).toHaveValue(values.city);
+  174 |     await expect(contactDetails.countrySelect).toContainText('Canada');
+  175 | 
+  176 |     await contactDetails.refresh();
+  177 | 
+  178 |     await expect(contactDetails.street1Input).toHaveValue(values.street1);
+  179 |     await expect(contactDetails.street2Input).toHaveValue(values.street2);
+  180 |     await expect(contactDetails.cityInput).toHaveValue(values.city);
+  181 |     await expect(contactDetails.stateInput).toHaveValue(values.state);
+  182 |     await expect(contactDetails.zipInput).toHaveValue(values.zip);
+  183 |     await expect(contactDetails.countrySelect).toContainText('Canada');
+  184 |     await expect(contactDetails.homeTelephoneInput).toHaveValue(values.home);
+  185 |     await expect(contactDetails.mobileInput).toHaveValue(values.mobile);
+  186 |     await expect(contactDetails.workTelephoneInput).toHaveValue(values.work);
+  187 |     await expect(contactDetails.workEmailInput).toHaveValue(values.workEmail);
+  188 |     await expect(contactDetails.otherEmailInput).toHaveValue(values.otherEmail);
+  189 |   });
+  190 | });
+  191 | 
+  192 | test.describe('My Info - Emergency Contacts', { tag: '@regression' }, () => {
+  193 |   test('ESS user can add an emergency contact', async ({ page }) => {
+  194 |     const dashboard = await loginAsEss(page);
+  195 |     const emergencyContacts = new EmergencyContactsPage(page);
+  196 |     const name = `Emergency ${Date.now()}`;
+  197 | 
+  198 |     await openMyInfoTab(page, dashboard, 'Emergency Contacts');
+```

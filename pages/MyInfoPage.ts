@@ -15,6 +15,7 @@ export class MyInfoPage {
   readonly maritalStatusSelect;
   readonly maleRadio;
   readonly femaleRadio;
+  readonly femaleRadioLabel;
   readonly saveButton;
   readonly editButton;
 
@@ -33,6 +34,7 @@ export class MyInfoPage {
     this.maritalStatusSelect = page.getByText('Marital Status', { exact: true }).locator('..').locator('..').locator('.oxd-select-text');
     this.maleRadio = page.getByRole('radio', { name: 'Male' });
     this.femaleRadio = page.getByRole('radio', { name: 'Female' });
+    this.femaleRadioLabel = page.locator('label').filter({ hasText: /^Female$/ }).first();
     this.saveButton = page.getByRole('button', { name: 'Save' }).first();
     this.editButton = page.getByRole('button', { name: 'Edit' });
   }
@@ -55,6 +57,16 @@ export class MyInfoPage {
 
   async savePersonalDetails() {
     await this.saveButton.click();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  async selectFemaleGender() {
+    if (await this.femaleRadioLabel.count() > 0) {
+      await this.femaleRadioLabel.click();
+      return;
+    }
+
+    await this.femaleRadio.locator('..').click();
   }
 
   private field(label: string) {
