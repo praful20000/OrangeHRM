@@ -258,3 +258,5 @@ test.describe('My Info - Dependants', { tag: '@regression' }, () => {
     await expect(dependants.row(name)).toHaveCount(0);
   });
 });
+
+// This is new
