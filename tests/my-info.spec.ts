@@ -10,7 +10,8 @@ import testData from '../test-data/test-data.json';
 async function loginAsEss(page: import('@playwright/test').Page) {
   const login = new LoginPage(page);
   await login.goto();
-  await login.login(testData.loginDetails.username, testData.loginDetails.password);
+  // Use the valid demo account. The previous `praful` credentials leave CI on the login page.
+  await login.login(testData.credentials.admin.username, testData.credentials.admin.password);
   await expect(page).toHaveURL(/\/dashboard\/index/);
   return new DashboardPage(page);
 }
@@ -27,7 +28,7 @@ test.describe('My Info - Personal Details', { tag: '@regression' }, () => {
     const myInfo = new MyInfoPage(page);
 
     await login.goto();
-    await login.login(testData.loginDetails.username, testData.loginDetails.password);
+    await login.login(testData.credentials.admin.username, testData.credentials.admin.password);
 
     await expect(page).toHaveURL(/\/dashboard\/index/);
 
@@ -49,7 +50,7 @@ test.describe('My Info - Personal Details', { tag: '@regression' }, () => {
     const myInfo = new MyInfoPage(page);
 
     await login.goto();
-    await login.login(testData.loginDetails.username, testData.loginDetails.password);
+    await login.login(testData.credentials.admin.username, testData.credentials.admin.password);
     await expect(page).toHaveURL(/\/dashboard\/index/);
 
     await dashboard.clickNavItem('MyInfo');
@@ -94,7 +95,7 @@ test.describe('My Info - Personal Details', { tag: '@regression' }, () => {
     const myInfo = new MyInfoPage(page);
 
     await login.goto();
-    await login.login(testData.loginDetails.username, testData.loginDetails.password);
+    await login.login(testData.credentials.admin.username, testData.credentials.admin.password);
     await expect(page).toHaveURL(/\/dashboard\/index/);
 
     await dashboard.clickNavItem('MyInfo');
