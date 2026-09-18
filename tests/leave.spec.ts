@@ -203,3 +203,5 @@ test.describe('Leave - Reports', {tag: '@regression'}, () => {
     await expect(leave.generateButton).toBeVisible();
   });
 });
+
+// ----------------------------------- @@@ ---------
