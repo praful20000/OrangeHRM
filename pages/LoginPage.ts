@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class LoginPage {
   readonly page: Page;
@@ -21,10 +21,14 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto(this.url);
+    await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
+    await expect(this.usernameInput).toBeVisible({ timeout: 15000 });
+    await expect(this.passwordInput).toBeVisible({ timeout: 15000 });
   }
 
   async login(username: string, password: string) {
+    await expect(this.usernameInput).toBeVisible({ timeout: 15000 });
+    await expect(this.passwordInput).toBeVisible({ timeout: 15000 });
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
     await this.loginButton.click();

@@ -20,6 +20,10 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
+  timeout: 45_000,
+  expect: {
+    timeout: 10_000,
+  },
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
  reporter: [
   ['html'],
@@ -32,9 +36,12 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     headless: true,
+    baseURL: 'https://opensource-demo.orangehrmlive.com',
+    actionTimeout: 15_000,
+    navigationTimeout: 30_000,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure', 
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */
@@ -83,7 +90,3 @@ export default defineConfig({
   // },
   
 });
-
-// new changes
-
-/// test
